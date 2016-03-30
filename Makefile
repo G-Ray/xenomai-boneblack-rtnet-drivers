@@ -14,6 +14,12 @@ obj-$(CONFIG_XENO_DRIVERS_NET_DRV_IGB) += igb/
 
 obj-$(CONFIG_XENO_DRIVERS_NET_DRV_8139) += rt_8139too.o
 
+obj-$(CONFIG_XENO_DRIVERS_NET_DRV_8139) += rt_8139too.o
+
+obj-$(CONFIG_XENO_DRIVERS_NET_DRV_TI_CPSW) += ticpsw/ \
+														   rt_davinci_mdio.o \
+														   rt_smsc.o
+
 rt_8139too-y := 8139too.o
 
 obj-$(CONFIG_XENO_DRIVERS_NET_DRV_AT91_ETHER) += rt_at91_ether.o
