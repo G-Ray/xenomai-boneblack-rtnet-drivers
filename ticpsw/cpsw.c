@@ -477,6 +477,7 @@ void cpsw_rx_handler(void *token, int len, int status)
 	struct rtnet_device	*ndev = skb->rtdev;
 	struct cpsw_priv	*priv = ndev->priv;
 	int			ret = 0;
+	nanosecs_abs_t time_stamp = rtdm_clock_read();
 
 	/* free and bail if we are shutting down */
 	if (unlikely(!rtnetif_running(ndev)) ||
@@ -486,6 +487,7 @@ void cpsw_rx_handler(void *token, int len, int status)
 	}
 
 	if (likely(status >= 0)) {
+		skb->time_stamp = time_stamp;
 		rtskb_put(skb, len);
 		cpts_rx_timestamp(&priv->cpts, skb);
 		skb->protocol = rt_eth_type_trans(skb, ndev);
